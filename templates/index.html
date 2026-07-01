@@ -1,0 +1,110 @@
+<!DOCTYPE html><!DOCTYPE html>
+<html>
+<head>
+    <title>Fake News Detection</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+
+<button id="theme-toggle">🌙</button>
+
+<div class="container">
+
+    <h1>📰 Fake News Detection</h1>
+
+    <form action="/predict" method="POST" onsubmit="showLoading()">
+
+        <textarea
+            name="news"
+            placeholder="Paste your news article here..."
+            required></textarea>
+
+        <button type="submit">
+            Check News
+        </button>
+
+    </form>
+
+    <div id="loading">
+        Analyzing article...
+    </div>
+
+    {% if prediction %}
+
+    <div class="card">
+
+        <h2>{{ prediction }}</h2>
+
+        <p>Confidence: {{ confidence }}%</p>
+
+        <div class="progress">
+            <div class="fill"
+                 style="width:{{ confidence }}%">
+                {{ confidence }}%
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Machine Learning Prediction</h3>
+
+        <p>{{ ml_prediction }}</p>
+
+        <p>Sources Found: {{ sources_found }}</p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Article Statistics</h3>
+
+        <p>Words: {{ word_count }}</p>
+        <p>Characters: {{ char_count }}</p>
+        <p>Sentences: {{ sentence_count }}</p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>AI Analysis</h3>
+
+        <p>{{ analysis }}</p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Related Articles</h3>
+
+        {% for article in related_articles %}
+
+            <a href="{{ article.link }}"
+               target="_blank">
+
+               {{ article.title }}
+
+            </a>
+
+            <br><br>
+
+        {% endfor %}
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
