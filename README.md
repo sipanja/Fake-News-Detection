@@ -42,7 +42,7 @@ fake-news-detection/
 ## Installation
 
 ```bash
-git clone https://github.com/your-username/fake-news-detection.git
+git clone https://github.com/sipanja/fake-news-detection.git
 
 cd fake-news-detection
 
